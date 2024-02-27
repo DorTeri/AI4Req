@@ -10,7 +10,8 @@ module.exports = {
         greenActive: '#1DC81A',
         blueLogo: '#00519B',
         input: '#D9D9D9',
-        inputText: '#8E8E8E'
+        inputText: '#8E8E8E',
+        projectBg: '#FEF7F7'
       }
     },
   },

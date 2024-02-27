@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { FormEvent, useEffect, useState } from 'react'
 import useForm from '../hooks/useFormHook'
 import CustomButton from '../UI/CustomButton';
 import logoImage from '../assets/logo.png'
@@ -12,7 +12,7 @@ const Signup = (props: Props) => {
   const navigate = useNavigate();
   const location = useLocation()
   const { pathname } = location
-  const { values, handleChange, handleSubmit, handleSelectChange } = useForm();
+  const { values, handleChange, handleSelectChange } = useForm();
   const [isLogin, setIsLogin] = useState(pathname === '/signup' ? false : true);
 
 
@@ -21,6 +21,12 @@ const Signup = (props: Props) => {
     setIsLogin(!isLogin)
     navigate(newPath)
   }
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log('Form submitted with values:', values);
+  };
+
 
   return (
     <section className={`flex grow ${isLogin && 'flex-row-reverse'}`}>
@@ -33,9 +39,8 @@ const Signup = (props: Props) => {
           <div className='mt-10'>
             <h2 className='pb-20 text-3xl text-white'>{isLogin ? 'New Here?' : 'Already a user?'}</h2>
             <p className='text-xl text-white'>{isLogin ? 'Join our advance AI tool to ease your user story creation process!' : 'Awesome! Welcome back!'}</p>
-            <CustomButton title={isLogin ? 'Sign Up' : 'Sign In'} textColor={'black'} bgColor={'white'} type='button' style={'mt-[80px]'} func={handleChangePath} />
+            <CustomButton title={isLogin ? 'Sign Up' : 'Sign In'} textColor={'black'} bgColor={'white'} type='button' style={'mt-[80px] bg-white'} func={handleChangePath} />
           </div>
-
         </div>
       </div>
       <div className='m-auto w-2/3 p-10'>
