@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import MyProjects from './views/MyProjects';
 import SharedProjects from './views/SharedProjects';
 import AllProjects from './views/AllProjects';
+import ProjectDetails from './views/ProjectDetails';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/myprojects" element={<MyProjects />} />
         <Route path="/sharedprojects" element={<SharedProjects />} />
         <Route path="/allprojects" element={<AllProjects />} />
+        <Route path="/project/:projectId" element={<ProjectDetails />} />
         <Route path="/*" element={<Navigate to="/myprojects" />} />
       </Routes>
     </section>

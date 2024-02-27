@@ -1,18 +1,22 @@
 import React from 'react'
+import demoProjects from '../constants'
+import ProjectPreview from '../cmps/ProjectPreview'
+import TitleDiv from '../UI/TitleDiv'
 
 type Props = {}
 
 const SharedProjects = (props: Props) => {
   return (
     <section className='flex flex-col grow'>
-    <div className='h-[200px]'>
-      <h2 className='text-center text-2xl font-semibold pt-8 pb-3'>Shared Projects</h2>
-      <hr className='bg-sidebar text-sidebar h-1'/>
-    </div>
-    <div>
-      
-    </div>
-  </section>
+      <TitleDiv title={'Shared Projects'} />
+      <div className='flex flex-wrap gap-4 p-5'>
+        {
+          demoProjects.map((project: any) => (
+            <ProjectPreview key={project.title} project={project} isAllProjects={false} />
+          ))
+        }
+      </div>
+    </section>
   )
 }
 

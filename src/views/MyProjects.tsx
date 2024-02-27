@@ -3,6 +3,7 @@ import CustomButton from '../UI/CustomButton'
 import NewProjectModal from '../cmps/NewProjectModal'
 import ProjectPreview from '../cmps/ProjectPreview'
 import demoProjects from '../constants'
+import TitleDiv from '../UI/TitleDiv'
 
 type Props = {}
 
@@ -17,10 +18,7 @@ const MyProjects = (props: Props) => {
 
   return (
     <section className='h-screen grow relative'>
-      <div className='h-[200px]'>
-        <h2 className='text-center text-2xl font-semibold pt-8 pb-3'>My Projects</h2>
-        <hr className='bg-sidebar text-sidebar h-1' />
-      </div>
+      <TitleDiv title={'My Projects'} />
       <div className='flex flex-wrap gap-4 p-5'>
         {
           demoProjects.map((project: any) => (

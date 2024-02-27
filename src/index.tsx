@@ -9,6 +9,7 @@ import Signup from './views/Signup'
 import MyProjects from './views/MyProjects';
 import SharedProjects from './views/SharedProjects';
 import AllProjects from './views/AllProjects';
+import ProjectDetails from './views/ProjectDetails';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -21,6 +22,7 @@ root.render(
         <Route path="myprojects" element={<MyProjects />} />
         <Route path="sharedprojects" element={<SharedProjects />} />
         <Route path="allprojects" element={<AllProjects />} />
+        <Route path="project/:projectId" element={<ProjectDetails />} />
       </Route>
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Signup />} />
