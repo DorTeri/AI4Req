@@ -11,7 +11,9 @@ module.exports = {
         blueLogo: '#00519B',
         input: '#D9D9D9',
         inputText: '#8E8E8E',
-        projectBg: '#FEF7F7'
+        projectBg: '#FEF7F7',
+        request: '#FFD464',
+        requested: '#FF7764',
       }
     },
   },

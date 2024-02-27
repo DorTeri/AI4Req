@@ -30,7 +30,7 @@ const SideBar = (props: Props) => {
 
 
     return (
-        <section className='flex flex-col bg-sidebar w-[250px] h-screen'>
+        <section className='flex flex-col bg-sidebar min-w-[250px] min-h-screen'>
             <div className='bg-sidebar flex gap-3 p-5 hover:cursor-pointer' onClick={() => handleNavigate('/')}>
                 <img src={logoImage} className='bg-transparent' />
                 <h2 className='text-3xl font-semibold self-end text-blueLogo'>AI4Req</h2>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import CustomButton from '../UI/CustomButton'
 import NewProjectModal from '../cmps/NewProjectModal'
 import ProjectPreview from '../cmps/ProjectPreview'
+import demoProjects from '../constants'
 
 type Props = {}
 
@@ -22,8 +23,8 @@ const MyProjects = (props: Props) => {
       </div>
       <div className='flex flex-wrap gap-4 p-5'>
         {
-          [1,2,3,4,5,6].map(item => (
-            <ProjectPreview />
+          demoProjects.map((project: any) => (
+            <ProjectPreview key={project.title} project={project} isAllProjects={false}/>
           ))
         }
       </div>
