@@ -1,5 +1,5 @@
 import React from 'react'
-import demoProjects from '../constants'
+import { demoProjects } from '../constants'
 import ProjectPreview from '../cmps/ProjectPreview'
 import TitleDiv from '../UI/TitleDiv'
 

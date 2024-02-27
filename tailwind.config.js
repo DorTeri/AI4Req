@@ -14,6 +14,9 @@ module.exports = {
         projectBg: '#FEF7F7',
         request: '#FFD464',
         requested: '#FF7764',
+        storyBlue: '#4CDBEF',
+        storyRed: '#FD4242',
+        grayNext: '#B7BCBA'
       }
     },
   },

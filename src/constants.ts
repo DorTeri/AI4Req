@@ -43,4 +43,10 @@ const demoProjects = [
     },
 ]
 
-export default demoProjects
+const demoGeneratedStories = [
+    'As a Doctor I want to see all treatments, so that I treat my patient better.',
+    'As a Nurse, I want to see all diet restirctions, so that I give the patinenta the right food.',
+    'As a Manager, I want to see all employee data, so that I manage my employees better.'
+]
+
+export { demoProjects , demoGeneratedStories }

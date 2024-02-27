@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import CustomButton from '../UI/CustomButton'
 import NewProjectModal from '../cmps/NewProjectModal'
 import ProjectPreview from '../cmps/ProjectPreview'
-import demoProjects from '../constants'
+import { demoProjects } from '../constants'
 import TitleDiv from '../UI/TitleDiv'
 
 type Props = {}
@@ -22,7 +22,7 @@ const MyProjects = (props: Props) => {
       <div className='flex flex-wrap gap-4 p-5'>
         {
           demoProjects.map((project: any) => (
-            <ProjectPreview key={project.title} project={project} isAllProjects={false}/>
+            <ProjectPreview key={project.title} project={project} isAllProjects={false} />
           ))
         }
       </div>

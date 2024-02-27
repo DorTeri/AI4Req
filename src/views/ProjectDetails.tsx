@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import TitleDiv from '../UI/TitleDiv';
-import demoProjects from '../constants';
+import { demoProjects } from '../constants';
 import CustomButton from '../UI/CustomButton';
+import StoryForm from '../cmps/StoryForm';
+import GeneratedStoryPreview from '../cmps/GeneratedStoryPreview';
+import { demoGeneratedStories } from '../constants';
 
 type Props = {}
 
@@ -19,6 +22,8 @@ const ProjectDetails = (props: Props) => {
         ChatGPT: true,
         Bard: false,
     });
+    const [isLoading, setIsLoading] = useState(false)
+    const [generatedStories, setGeneratedStories] = useState<any>([])
 
     useEffect(() => {
         const project = demoProjects.find(project => project._id === projectId)
@@ -26,10 +31,22 @@ const ProjectDetails = (props: Props) => {
     }, [projectId, params])
 
     const handleSubmit = () => {
-
+        setIsLoading(true)
+        setTimeout(() => {
+            setGeneratedStories(demoGeneratedStories)
+            setIsLoading(false);
+        }, 2000);
     }
 
     if (!currentProject) {
+        return (
+            <div>
+                Loading...
+            </div>
+        )
+    }
+
+    if (isLoading) {
         return (
             <div>
                 Loading...
@@ -42,52 +59,23 @@ const ProjectDetails = (props: Props) => {
             <TitleDiv title={currentProject.title} />
             <div className='p-4 relative h-full'>
                 <h2 className='mt-5 text-2xl underline text-center'>User Stories Generation</h2>
-                <form className='flex flex-col gap-3 mt-6'>
-                    <label className='text-xl'>
-                        Insert your System Description:
-                    </label>
-                    <textarea
-                        name="description"
-                        value={desc}
-                        onChange={(e) => setDesc(e.target.value)}
-                        className='bg-input text-inputText p-2 rounded min-h-[200px]'
-                    />
-                    <div className='flex gap-3'>
-                        <label className='text-xl'>
-                            Insert your Desired Numbers of User Stories:
-                        </label>
-                        <input
-                            type="number"
-                            name="stories"
-                            value={numberOfStories}
-                            onChange={(e) => setNumberOfStories(e.target.value)}
-                            placeholder="Project Title"
-                            className='bg-input text-inputText p-2 rounded w-20'
-                        />
-                    </div>
-                    <div className='flex items-center gap-3'>
-                        <label className='text-xl'>
-                            Choose your Desired AI Model:
-                        </label>
-                        {Object.keys(selectedTechnologies).map((techName) => (
-                            <label key={techName} className="flex gap-1 items-center text-lg bg-input p-2 pr-4 pl-3 rounded">
-                                <input
-                                    type="radio"
-                                    name={techName}
-                                    checked={selectedTechnologies[techName]}
-                                    onChange={(e) =>
-                                        setSelectedTechnologies({
-                                            ...selectedTechnologies,
-                                            [techName]: e.target.checked,
-                                        })
-                                    }
-                                />
-                                {techName}
-                            </label>
-                        ))}
-                    </div>
-                </form>
-                <CustomButton title={'Generate User Stories'} type='button' func={handleSubmit} style={'absolute bottom-5 right-5'}/>
+                {
+                    !generatedStories[0] ? (
+                        <StoryForm desc={desc} setDesc={setDesc}
+                            numberOfStories={numberOfStories} setNumberOfStories={setNumberOfStories}
+                            selectedTechnologies={selectedTechnologies} setSelectedTechnologies={setSelectedTechnologies}
+                            handleSubmit={handleSubmit} />
+                    ) : (
+                        <div className='flex flex-col gap-4'>
+                            {
+                                generatedStories.map((story: any, index: number) => (
+                                    <GeneratedStoryPreview story={story} storyNumber={index} key={index} />
+                                ))
+                            }
+                            <CustomButton title={'Next'} type='button' style={'bg-grayNext absolute bottom-5 right-5'}/>
+                        </div>
+                    )
+                }
             </div>
         </section>
     )
