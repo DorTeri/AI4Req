@@ -23,8 +23,8 @@ const ProjectPreview = ({ isAllProjects, project }: Props) => {
 
 
   return (
-    <div className='flex flex-col m-auto gap-2 text-center border-sidebar border-2 p-1 w-[200px] hover:cursor-pointer' 
-    onClick={handleProjectClicked}>
+    <div className='flex flex-col m-auto gap-2 text-center border-sidebar border-2 p-1 w-[200px] hover:cursor-pointer'
+      onClick={handleProjectClicked}>
       <div className='bg-projectBg p-1'>
         {project.title}
       </div>
@@ -36,7 +36,7 @@ const ProjectPreview = ({ isAllProjects, project }: Props) => {
       </div>
       {
         isAllProjects && project.isApproved ? (
-          <CustomButton title={'Permission Requested'} type='button' style={'bg-requested w-4/5'} />
+          <CustomButton title={'Permission Requested'} type='button' bgColor='requested' style={'bg-requested w-4/5'} />
         ) : (
           <CustomButton title={'Request View Access'} type='button' style={'bg-request w-4/5'} func={(e: any) => handleRequest(e)} />
         )

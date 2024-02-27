@@ -4,7 +4,7 @@ type Props = {
     title: String;
     type: 'submit' | 'reset' | 'button';
     textColor?: String;
-    bgColor?: 'black' | 'white';
+    bgColor?: 'black' | 'white' | 'requested';
     style?: String;
     func?: (isLogin : boolean) => void;
 }

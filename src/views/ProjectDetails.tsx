@@ -69,7 +69,7 @@ const ProjectDetails = (props: Props) => {
                         <div className='flex flex-col gap-4'>
                             {
                                 generatedStories.map((story: any, index: number) => (
-                                    <GeneratedStoryPreview story={story} storyNumber={index} key={index} />
+                                    <GeneratedStoryPreview story={story} storyNumber={index + 1} key={index} />
                                 ))
                             }
                             <CustomButton title={'Next'} type='button' style={'bg-grayNext absolute bottom-5 right-5'}/>
