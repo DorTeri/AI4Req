@@ -4,17 +4,20 @@ import CustomButton from '../UI/CustomButton';
 type Props = {
     story: any;
     storyNumber: number;
-    handleSaveStory: (story: any) => void;
+    handleSaveStory?: (story: any) => void;
+    isEvaluating: boolean
 }
 
-const GeneratedStoryPreview = ({ story, storyNumber, handleSaveStory }: Props) => {
+const GeneratedStoryPreview = ({ story, storyNumber, handleSaveStory, isEvaluating }: Props) => {
 
     const [isSaved, setIsSaved] = useState(false)
 
     const handleSave = () => {
         // Implement save
         setIsSaved(true)
-        handleSaveStory(story)
+        if (handleSaveStory) {
+            handleSaveStory(story)
+        }
         console.log('save')
     }
 
@@ -31,10 +34,17 @@ const GeneratedStoryPreview = ({ story, storyNumber, handleSaveStory }: Props) =
             </div>
             <div className='flex w-[200px] self-start'>
                 {
-                    !isSaved ? (
+                    !isEvaluating && !isSaved && (
                         <CustomButton title={'Save'} type='button' style={'bg-storyBlue pl-5 pr-5 rounded-3xl ml-0'} func={handleSave} />
-                    ) : (
-                        <CustomButton title={'Saved'} type='button' style={'bg-storyBlue pl-5 pr-5 rounded-3xl ml-0'} />
+                    )
+                }
+                {
+                    !isEvaluating && isSaved &&
+                    <CustomButton title={'Saved'} type='button' style={'bg-storyBlue pl-5 pr-5 rounded-3xl ml-0'} />
+                }
+                {
+                    isEvaluating && (
+                        <CustomButton title={'Evaluate'} type='button' style={'bg-storyBlue pl-5 pr-5 rounded-3xl ml-0 mr-3'} />
                     )
                 }
                 <CustomButton title={'Delete'} type='button' style={'bg-storyRed pl-5 pr-5 rounded-3xl ml-0'} func={handleDelete} />

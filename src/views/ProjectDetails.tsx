@@ -25,6 +25,7 @@ const ProjectDetails = (props: Props) => {
     const [isLoading, setIsLoading] = useState(false)
     const [generatedStories, setGeneratedStories] = useState<any>([])
     const [savedGeneratedStories, setSavedGeneratedStories] = useState<any>([])
+    const [isEvaluating, setIsEvaluating] = useState(false)
 
     useEffect(() => {
         const project = demoProjects.find(project => project._id === projectId)
@@ -42,6 +43,10 @@ const ProjectDetails = (props: Props) => {
     const handleSaveStory = (story: any) => {
         const updatedSavedGeneratedStories = [...savedGeneratedStories, story]
         setSavedGeneratedStories(updatedSavedGeneratedStories)
+    }
+
+    const handleNextClick = () => {
+        setIsEvaluating(true)
     }
 
     if (!currentProject) {
@@ -64,22 +69,33 @@ const ProjectDetails = (props: Props) => {
         <section className='flex flex-col grow'>
             <TitleDiv title={currentProject.title} />
             <div className='p-4 relative h-full'>
-                <h2 className='mt-5 text-2xl underline text-center'>User Stories Generation</h2>
+                <h2 className='mt-5 text-2xl underline text-center'>{isEvaluating ? 'User Stories Evaluation' : 'User Stories Generation'}</h2>
                 {
-                    !generatedStories[0] ? (
+                    !isEvaluating && !generatedStories[0] && (
                         <StoryForm desc={desc} setDesc={setDesc}
                             numberOfStories={numberOfStories} setNumberOfStories={setNumberOfStories}
                             selectedTechnologies={selectedTechnologies} setSelectedTechnologies={setSelectedTechnologies}
                             handleSubmit={handleSubmit} />
-                    ) : (
+                    )
+                }
+                {
+                    !isEvaluating && generatedStories[0] &&
+                    (
                         <div className='flex flex-col gap-4'>
                             {
                                 generatedStories.map((story: any, index: number) => (
-                                    <GeneratedStoryPreview story={story} storyNumber={index + 1} key={index} handleSaveStory={handleSaveStory} />
+                                    <GeneratedStoryPreview story={story} storyNumber={index + 1} key={index} handleSaveStory={handleSaveStory} isEvaluating={isEvaluating} />
                                 ))
                             }
-                            <CustomButton title={'Next'} bgColor={`bg-${savedGeneratedStories.length > 0 ? 'bg-sidebar' : 'bg-grayNext'}`} type='button' style={`bg-grayNext ${savedGeneratedStories.length > 0 && 'bg-sidebar'} absolute bottom-5 right-5`} />
+                            <CustomButton title={'Next'} bgColor={`bg-${savedGeneratedStories.length > 0 ? 'bg-sidebar' : 'bg-grayNext'}`} type='button' style={`bg-grayNext ${savedGeneratedStories.length > 0 && 'bg-sidebar'} absolute bottom-5 right-5`} func={handleNextClick} />
                         </div>
+                    )
+                }
+                {
+                    isEvaluating && (
+                        savedGeneratedStories.map((story: any, index: number) => (
+                            <GeneratedStoryPreview story={story} storyNumber={index + 1} key={index} isEvaluating={isEvaluating} />
+                        ))
                     )
                 }
             </div>

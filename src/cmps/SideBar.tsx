@@ -1,7 +1,7 @@
 import React from 'react'
 import logoImage from '../assets/logo.png'
 import SidebarItem from './SidebarItem'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 type Props = {}
 
@@ -23,6 +23,8 @@ const titles = [
 const SideBar = (props: Props) => {
 
     const navigate = useNavigate();
+    const location = useLocation()
+    const { pathname } = location
 
     const handleNavigate = (path: any) => {
         navigate(path)
@@ -40,7 +42,7 @@ const SideBar = (props: Props) => {
                 {
                     titles.map(item => (
                         <div onClick={() => handleNavigate(item.path)}>
-                            <SidebarItem title={item.name} key={item.path} />
+                            <SidebarItem title={item.name} key={item.path} active={pathname === '/' + item.path}/>
                         </div>
                     ))
                 }
