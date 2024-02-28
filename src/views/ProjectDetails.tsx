@@ -24,6 +24,7 @@ const ProjectDetails = (props: Props) => {
     });
     const [isLoading, setIsLoading] = useState(false)
     const [generatedStories, setGeneratedStories] = useState<any>([])
+    const [savedGeneratedStories, setSavedGeneratedStories] = useState<any>([])
 
     useEffect(() => {
         const project = demoProjects.find(project => project._id === projectId)
@@ -36,6 +37,11 @@ const ProjectDetails = (props: Props) => {
             setGeneratedStories(demoGeneratedStories)
             setIsLoading(false);
         }, 2000);
+    }
+
+    const handleSaveStory = (story: any) => {
+        const updatedSavedGeneratedStories = [...savedGeneratedStories, story]
+        setSavedGeneratedStories(updatedSavedGeneratedStories)
     }
 
     if (!currentProject) {
@@ -69,10 +75,10 @@ const ProjectDetails = (props: Props) => {
                         <div className='flex flex-col gap-4'>
                             {
                                 generatedStories.map((story: any, index: number) => (
-                                    <GeneratedStoryPreview story={story} storyNumber={index + 1} key={index} />
+                                    <GeneratedStoryPreview story={story} storyNumber={index + 1} key={index} handleSaveStory={handleSaveStory} />
                                 ))
                             }
-                            <CustomButton title={'Next'} type='button' style={'bg-grayNext absolute bottom-5 right-5'}/>
+                            <CustomButton title={'Next'} bgColor={`bg-${savedGeneratedStories.length > 0 ? 'bg-sidebar' : 'bg-grayNext'}`} type='button' style={`bg-grayNext ${savedGeneratedStories.length > 0 && 'bg-sidebar'} absolute bottom-5 right-5`} />
                         </div>
                     )
                 }

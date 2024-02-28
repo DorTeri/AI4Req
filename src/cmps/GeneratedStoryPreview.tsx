@@ -3,16 +3,18 @@ import CustomButton from '../UI/CustomButton';
 
 type Props = {
     story: any;
-    storyNumber: number
+    storyNumber: number;
+    handleSaveStory: (story: any) => void;
 }
 
-const GeneratedStoryPreview = ({ story, storyNumber }: Props) => {
+const GeneratedStoryPreview = ({ story, storyNumber, handleSaveStory }: Props) => {
 
-    const [isSaved , setIsSaved] = useState(false)
+    const [isSaved, setIsSaved] = useState(false)
 
     const handleSave = () => {
         // Implement save
         setIsSaved(true)
+        handleSaveStory(story)
         console.log('save')
     }
 

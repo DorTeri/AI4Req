@@ -29,13 +29,9 @@ const MyProjects = (props: Props) => {
       <div className='absolute right-3 bottom-3'>
         <CustomButton title={'New Project'} type='button' style={'self-end'} func={toggleModal} />
       </div>
-      {
-        isModalOpen && (
-          <div className='absolute z-10 left-1/4'>
-            <NewProjectModal toggleModal={toggleModal} />
-          </div>
-        )
-      }
+      <div className={`absolute z-10 right-[135px] bottom-[50px] bg-white rounded-xl ${!isModalOpen ? 'opacity-0' : 'opacity-100'} transition-all`}>
+        <NewProjectModal toggleModal={toggleModal} />
+      </div>
     </section>
   )
 }
